@@ -30,11 +30,7 @@ public class KeyListener implements Listener {
 	public void onChestClick(PlayerInteractEvent e) {
 		Player p = e.getPlayer();
 
-		if (!p.hasPermission("keycrates.use")) {
-			p.sendMessage(ChatColor.YELLOW + "ERROR: " + ChatColor.GREEN
-					+ "You don't have the required permission for that.");
-			return;
-		} else if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
+		if (e.getAction() == Action.RIGHT_CLICK_BLOCK) {
 			if ((e.getItem() != null) && e.getItem().getType() != Material.AIR) {
 				ItemStack iih = e.getItem();
 				if ((iih.getType() == Material.TRIPWIRE_HOOK) && (iih.getItemMeta().getDisplayName().contains("Key"))
