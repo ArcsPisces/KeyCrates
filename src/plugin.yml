@@ -1,6 +1,6 @@
 name: KeyCrates
 description: Lightweight crates system.
-version: 1.0-0.1
+version: 1.0-0.2
 depend: [HolographicDisplays]
 main: com.holland.keycrates.Main
 authors: [ArcsPisces, Rhys Tedstone]

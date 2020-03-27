@@ -110,12 +110,12 @@ public class Main extends JavaPlugin {
 					p.sendMessage(ChatColor.AQUA + "/kc list" + ChatColor.RED + "- List all existing crates.");
 					p.sendMessage(
 							ChatColor.AQUA + "/kc title {id} {title}" + ChatColor.RED + "- Set a title for a crate.");
+					return true;
 				} else if (args.length == 1) {
 					if (args[0].equalsIgnoreCase("list")) {
 						if (!p.hasPermission("keycrates.list")) {
 							p.sendMessage(ChatColor.YELLOW + "ERROR: " + ChatColor.GREEN
 									+ "You don't have the required permission for that.");
-							return false;
 						}
 
 						p.sendMessage(ChatColor.YELLOW + "-=-=-=-=-=-=-=-=-=- " + ChatColor.GREEN + "KeyCrates"
@@ -124,6 +124,11 @@ public class Main extends JavaPlugin {
 						for (String crate : allCrates) {
 							p.sendMessage(ChatColor.AQUA + " - " + ChatColor.RED + crate.toUpperCase());
 						}
+						return true;
+
+					} else {
+
+						return false;
 
 					}
 				} else if (args.length == 2) {
@@ -132,7 +137,7 @@ public class Main extends JavaPlugin {
 						if (!p.hasPermission("keycrates.create")) {
 							p.sendMessage(ChatColor.YELLOW + "ERROR: " + ChatColor.GREEN
 									+ "You don't have the required permission for that.");
-							return false;
+							return true;
 						}
 
 						Block b = p.getTargetBlock(null, 5);
@@ -149,14 +154,13 @@ public class Main extends JavaPlugin {
 						p.sendMessage(ChatColor.GREEN + "Success! " + ChatColor.YELLOW + "Created a key crate at "
 								+ ChatColor.AQUA + "[" + x + ", " + y + ", " + z + "]");
 						reloadHolograms();
-					}
-
-					if (args[0].equalsIgnoreCase("delete")) {
+						return true;
+					} else if (args[0].equalsIgnoreCase("delete")) {
 
 						if (!p.hasPermission("keycrates.create")) {
 							p.sendMessage(ChatColor.YELLOW + "ERROR: " + ChatColor.GREEN
 									+ "You don't have the required permission for that.");
-							return false;
+							return true;
 						}
 
 						String id = args[1].toLowerCase();
@@ -166,15 +170,14 @@ public class Main extends JavaPlugin {
 							reloadHolograms();
 							p.sendMessage(ChatColor.GREEN + "Success! " + ChatColor.YELLOW
 									+ "Deleted a key crate with ID " + ChatColor.AQUA + id.toUpperCase());
+							return true;
 						}
-					}
-
-					if (args[0].equalsIgnoreCase("key")) {
+					} else if (args[0].equalsIgnoreCase("key")) {
 
 						if (!p.hasPermission("keycrates.key")) {
 							p.sendMessage(ChatColor.YELLOW + "ERROR: " + ChatColor.GREEN
 									+ "You don't have the required permission for that.");
-							return false;
+							return true;
 						}
 
 						String id = args[1].toLowerCase();
@@ -199,21 +202,21 @@ public class Main extends JavaPlugin {
 							p.getInventory().addItem(key);
 							p.sendMessage(ChatColor.GREEN + "Success! " + ChatColor.YELLOW
 									+ "Gifted a crate key with for " + ChatColor.AQUA + id.toUpperCase() + " Crate.");
+							return true;
 						}
-					}
-
-					if (args[0].equalsIgnoreCase("prizes")) {
+					} else if (args[0].equalsIgnoreCase("prizes")) {
 
 						if (!p.hasPermission("keycrates.prizes")) {
 							p.sendMessage(ChatColor.YELLOW + "ERROR: " + ChatColor.GREEN
 									+ "You don't have the required permission for that.");
-							return false;
+							return true;
 						}
 
 						String id = args[1].toLowerCase();
 
 						if (crates().get("crates." + id + ".world") == null) {
-							return false;
+							p.sendMessage(ChatColor.YELLOW + "ERROR: " + ChatColor.GREEN + "Crate does not exist.");
+							return true;
 						}
 
 						Inventory gui = Bukkit.createInventory(null, 27,
@@ -228,30 +231,46 @@ public class Main extends JavaPlugin {
 						}
 
 						p.openInventory(gui);
+						return true;
 					}
+
+					return false;
 				} else if (args.length == 3) {
 					if (args[0].equalsIgnoreCase("title")) {
 
 						if (!p.hasPermission("keycrates.title")) {
 							p.sendMessage(ChatColor.YELLOW + "ERROR: " + ChatColor.GREEN
 									+ "You don't have the required permission for that.");
-							return false;
+							return true;
 						}
 
 						String proposedCrate = args[1].toLowerCase();
 						if (crates().get("crates." + proposedCrate + ".world") == null) {
 							p.sendMessage(ChatColor.RED + "The selected crate does not exist.");
-							return false;
 						} else {
 							String setName = ChatColor.translateAlternateColorCodes('&', args[2]);
 							crates.set("crates." + proposedCrate + ".name", setName);
 						}
 
 						reloadHolograms();
+						return true;
+
+					} else {
+
+						return false;
 
 					}
+				} else {
+
+					return false;
+
 				}
 			}
+		} else {
+
+			sender.sendMessage(
+					ChatColor.YELLOW + "ERROR: " + ChatColor.GREEN + "These commands must be run as a player");
+
 		}
 
 		return false;
