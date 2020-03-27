@@ -1,9 +1,0 @@
-name: KeyCrates
-description: Lightweight crates system.
-version: 1.0
-softdepend: [HolographicDisplays]
-main: com.holland.keycrates.Main
-commands:
-  keycrates:
-    description: Main command for KeyCrates plugin.
-    aliases: [kc]
