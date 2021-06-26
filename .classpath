@@ -3,6 +3,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Spigot"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/API"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/HolographicDisplaysAPI"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
