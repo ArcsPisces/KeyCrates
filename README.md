@@ -1,7 +1,6 @@
 # This plugin is no longer updated or supported.
 ### An alternative plugin is being planned for release on [AbyssalVoid.net](https://abyssalvoid.net)
-### This repository will remain.
-
+### This repository has been archived.
 
 # KeyCrates
 ### Ultra lightweight crates plugin for spigot.
